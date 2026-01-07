@@ -166,6 +166,8 @@ public final class WalkingTaskType extends BukkitTaskType {
                 // we can safely ignore any other actions here as there is
                 // really no better way to detect flying with elytra
                     !player.isInsideVehicle() && this.plugin.getVersionSpecificHandler().isPlayerGliding(player);
+
+            case ANY -> true;
         };
     }
 
@@ -190,7 +192,8 @@ public final class WalkingTaskType extends BukkitTaskType {
         RUNNING,
         SWIMMING,
         FLYING,
-        ELYTRA;
+        ELYTRA,
+        ANY;
 
         private static final Map<String, Mode> STRING_MODE_MAP = new HashMap<>() {{
             for (final Mode mode : Mode.values()) {
