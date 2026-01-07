@@ -152,11 +152,19 @@ public final class WalkingTaskType extends BukkitTaskType {
                 // is not possible, so we ignore it as well
                     !player.isInsideVehicle() && !player.isSneaking() && !player.isSwimming() && player.isSprinting()
                             && !player.isFlying() && !this.plugin.getVersionSpecificHandler().isPlayerGliding(player);
+            case FOOT_LIKE ->
+                // player is sneaking, walking, or running
+                    !player.isInsideVehicle() && !player.isSwimming()
+                            && !player.isFlying() && !this.plugin.getVersionSpecificHandler().isPlayerGliding(player);
             case SWIMMING ->
                 // sprinting and sneaking is possible with swimming at once,
                 // so we ignore it but not gliding as it's a bit different
                     !player.isInsideVehicle() && player.isSwimming()
                             && !this.plugin.getVersionSpecificHandler().isPlayerGliding(player);
+            case MANUAL_MOVEMENT ->
+                // player is sneaking, walking, running, or swimming
+                    !player.isInsideVehicle()
+                            && !player.isFlying() && !this.plugin.getVersionSpecificHandler().isPlayerGliding(player);
             case FLYING ->
                 // sprinting and sneaking is possible with flying at once,
                 // so we ignore it but not gliding as it's a bit different
@@ -190,7 +198,9 @@ public final class WalkingTaskType extends BukkitTaskType {
         SNEAKING,
         WALKING,
         RUNNING,
+        FOOT_LIKE,
         SWIMMING,
+        MANUAL_MOVEMENT,
         FLYING,
         ELYTRA,
         ANY;
